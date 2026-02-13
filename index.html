@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Ishita 🌸</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:radial-gradient(circle at top,#2b003b,#0d001a 70%);
+            color:white;
+            text-align:center;
+            overflow-x:hidden;
+            opacity:0;
+            transition:opacity 2s ease;
+        }
+
+        /* Stars */
+        body::before{
+            content:"";
+            position:fixed;
+            width:200%;
+            height:200%;
+            background:url('https://www.transparenttextures.com/patterns/stardust.png');
+            animation:moveStars 60s linear infinite;
+            opacity:0.4;
+            z-index:-2;
+        }
+
+        @keyframes moveStars{
+            from{transform:translate(0,0);}
+            to{transform:translate(-500px,-500px);}
+        }
+
+        /* Floating Hearts */
+        .heart{
+            position:fixed;
+            bottom:-10px;
+            font-size:20px;
+            color:#ff99cc;
+            animation:floatUp 6s linear infinite;
+        }
+        @keyframes floatUp{
+            0%{transform:translateY(0);opacity:1;}
+            100%{transform:translateY(-100vh);opacity:0;}
+        }
+
+        /* Floating Lilies */
+        .lily{
+            position:fixed;
+            bottom:-50px;
+            font-size:28px;
+            animation:floatLily 10s linear infinite;
+            opacity:0.8;
+        }
+        @keyframes floatLily{
+            0%{transform:translateY(0) rotate(0deg);opacity:0;}
+            30%{opacity:1;}
+            100%{transform:translateY(-120vh) rotate(360deg);opacity:0;}
+        }
+
+        /* Header */
+        header{
+            padding:70px 20px;
+        }
+
+        h1{
+            font-family:'Great Vibes',cursive;
+            font-size:65px;
+            color:#ffb6e6;
+            text-shadow:0 0 25px #ff66b2;
+        }
+
+        .subtitle{
+            margin-top:10px;
+            font-size:20px;
+            color:#ffd6f6;
+        }
+
+        /* Gallery */
+        .gallery{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:25px;
+            padding:40px 20px;
+        }
+
+        .gallery img{
+            width:280px;
+            height:350px;
+            object-fit:cover;
+            border-radius:20px;
+            box-shadow:0 0 25px rgba(255,182,193,0.7);
+            transition:0.4s;
+        }
+
+        .gallery img:hover{
+            transform:scale(1.07);
+        }
+
+        /* Letter */
+        .letter{
+            padding:60px 20px;
+            max-width:800px;
+            margin:auto;
+        }
+
+        .letter h2{
+            font-family:'Great Vibes',cursive;
+            font-size:45px;
+            margin-bottom:20px;
+            color:#ffccf9;
+        }
+
+        .letter p{
+            font-size:18px;
+            line-height:1.9;
+        }
+
+        /* Counters */
+        .counter{
+            margin:40px 0;
+            font-size:22px;
+            color:#ffccff;
+        }
+
+        button{
+            padding:15px 40px;
+            border:none;
+            border-radius:50px;
+            background:linear-gradient(45deg,#ff4da6,#ff99cc);
+            color:white;
+            font-size:18px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            transform:scale(1.1);
+            box-shadow:0 0 20px #ff66b2;
+        }
+
+        .hidden-message{
+            margin-top:20px;
+            font-size:22px;
+            color:#ffe6ff;
+            display:none;
+        }
+
+        footer{
+            margin-top:80px;
+            padding:20px;
+            font-size:14px;
+            color:#ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+    <source src="lover.mp3" type="audio/mpeg">
+</audio>
+
+<header>
+    <h1>For Ishita 🌸</h1>
+    <div class="subtitle">
+        To the Love of my life, Princess Wookie of the Pookie Wookie Kingdom 👑🪷
+    </div>
+</header>
+
+<section class="gallery">
+    <img src="memory1.jpeg" alt="memory1">
+    <img src="memory2.jpeg" alt="memory2">
+    <img src="memory3.jpeg" alt="memory3">
+    <img src="memory4.jpeg" alt="memory4">
+</section>
+
+<section class="letter">
+    <h2>My Water Lily 🪷</h2>
+    <p>
+        Ishita, my darling, my Prishita,
+        like a water lily blooming gently over still waters,
+        you’ve brought calm, warmth and something quietly magical into my life.
+        Since I've known you, everything feels brighter.
+        And this is definitely just the beginning of something that grows,
+        softly, steadily… beautifully.
+    </p>
+</section>
+
+<section class="counter">
+    💕 Together since 16th December:
+    <div id="timeTogether"></div>
+</section>
+
+<section class="counter">
+    ⏳ Countdown to 16th February:
+    <div id="countdown"></div>
+</section>
+
+<button onclick="showMessage()">A Little Royal Secret 👑</button>
+<div class="hidden-message" id="hiddenMessage">
+    No matter what, I’ll always choose you, Ishita. 💖🪷
+</div>
+
+<footer>
+    Made with love for Ishita 🌸
+</footer>
+
+<script>
+    window.onload=function(){
+        document.body.style.opacity="1";
+        document.getElementById("bgMusic").play();
+    };
+
+    function createHeart(){
+        const heart=document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML="❤️";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=Math.random()*20+15+"px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),6000);
+    }
+    setInterval(createHeart,600);
+
+    function createLily(){
+        const lily=document.createElement("div");
+        lily.classList.add("lily");
+        lily.innerHTML="🪷";
+        lily.style.left=Math.random()*100+"vw";
+        document.body.appendChild(lily);
+        setTimeout(()=>lily.remove(),10000);
+    }
+    setInterval(createLily,2000);
+
+    const startDate=new Date("December 16, 2025 00:00:00");
+    function updateTogether(){
+        const now=new Date();
+        const diff=now-startDate;
+        const days=Math.floor(diff/(1000*60*60*24));
+        const hours=Math.floor((diff/(1000*60*60))%24);
+        const minutes=Math.floor((diff/(1000*60))%60);
+        document.getElementById("timeTogether").innerHTML=
+            `${days} days, ${hours} hours, ${minutes} minutes`;
+    }
+    setInterval(updateTogether,1000);
+
+    const targetDate=new Date("February 16, 2026 00:00:00");
+    function updateCountdown(){
+        const now=new Date();
+        const diff=targetDate-now;
+        if(diff<=0){
+            document.getElementById("countdown").innerHTML=
+                "Happy 2 Months My Love 🌸";
+            return;
+        }
+        const days=Math.floor(diff/(1000*60*60*24));
+        const hours=Math.floor((diff/(1000*60*60))%24);
+        const minutes=Math.floor((diff/(1000*60))%60);
+        document.getElementById("countdown").innerHTML=
+            `${days} days, ${hours} hours, ${minutes} minutes`;
+    }
+    setInterval(updateCountdown,1000);
+
+    function showMessage(){
+        document.getElementById("hiddenMessage").style.display="block";
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Ishita 💌</title>
+
+  <style>
+    body{
+      margin:0;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#ffd6e0,#cafffb);
+      font-family:Arial, sans-serif;
+      overflow:hidden;
+      transition:opacity 0.8s ease; /* Fade transition restored */
+    }
+
+    /* Envelope */
+    .envelope{
+      position:relative;
+      width:320px;
+      height:200px;
+      background:linear-gradient(to bottom,#ff9bb5,#ff7fa6);
+      border-radius:10px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.25);
+      cursor:pointer;
+      overflow:hidden;
+    }
+
+    /* Bottom seam */
+    .envelope::after{
+      content:"";
+      position:absolute;
+      bottom:0;
+      width:100%;
+      height:100%;
+      background:linear-gradient(to bottom,#ff7fa6,#ff5c8a);
+      clip-path:polygon(0 100%,50% 55%,100% 100%);
+      opacity:0.8;
+    }
+
+    /* Flap */
+    .flap{
+      position:absolute;
+      width:100%;
+      height:60%;
+      background:linear-gradient(to bottom,#ff5c8a,#ff3e78);
+      top:0;
+      left:0;
+      border-top-left-radius:10px;
+      border-top-right-radius:10px;
+      transform-origin:top;
+      transition:transform 0.4s ease;
+      z-index:2;
+    }
+
+    /* Heart seal */
+    .flap::after{
+      content:"❤";
+      position:absolute;
+      bottom:-12px;
+      left:50%;
+      transform:translateX(-50%);
+      font-size:18px;
+      color:white;
+    }
+
+    /* Letter */
+    .letter{
+      position:absolute;
+      width:90%;
+      left:5%;
+      bottom:10px;
+      background:white;
+      border-radius:6px;
+      padding:15px;
+      text-align:center;
+      transform:translateY(100%);
+      transition:transform 0.4s ease;
+      z-index:1;
+    }
+
+    /* Open state */
+    .open .flap{
+      transform:rotate(180deg);
+    }
+
+    .open .letter{
+      transform:translateY(0);
+    }
+
+    /* Buttons */
+    button{
+      padding:8px 16px;
+      margin:8px;
+      border:none;
+      border-radius:20px;
+      cursor:pointer;
+    }
+
+    .yes-btn{background:#ff4d6d;color:white;}
+    .no-btn{background:gray;color:white;}
+
+    /* Modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.7);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:10;
+    }
+
+    .modal-content{
+      background:white;
+      padding:25px;
+      border-radius:10px;
+      text-align:center;
+    }
+
+    /* Cat Video */
+    .cat-overlay{
+      position:fixed;
+      inset:0;
+      background:black;
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:20;
+    }
+
+    .cat-overlay video{
+      width:80%;
+      max-width:500px;
+    }
+
+    /* Celebration screen */
+    .yay{
+      position:fixed;
+      inset:0;
+      background:#ff4d6d;
+      color:white;
+      display:none;
+      justify-content:center;
+      align-items:center;
+      font-size:32px;
+      z-index:30;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="envelope" id="envelope" onclick="openEnvelope()">
+
+  <div class="flap"></div>
+
+  <div class="letter">
+    <h3>Prisha 💖</h3>
+    <p>Will you be my Valentine?</p>
+    <button class="yes-btn" onclick="celebrate(event)">Yes 💕</button>
+    <button class="no-btn" onclick="askSure(event)">No 💔</button>
+  </div>
+
+</div>
+
+<div class="modal" id="sureModal">
+  <div class="modal-content">
+    <h3>Are you sure, Ishita? 🥺</h3>
+    <button onclick="closeModal()">Oops 💕</button>
+    <button onclick="showCat()">Yes I'm sure 😭</button>
+  </div>
+</div>
+
+<div class="cat-overlay" id="catOverlay">
+  <video id="catVideo" loop muted playsinline>
+    <source src="Cat_crying.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="yay" id="yayScreen">
+  YAYYYYY 💖
+</div>
+
+<script>
+  const envelope = document.getElementById("envelope");
+  const modal = document.getElementById("sureModal");
+  const catOverlay = document.getElementById("catOverlay");
+  const catVideo = document.getElementById("catVideo");
+  const yay = document.getElementById("yayScreen");
+
+  /* Open envelope */
+  function openEnvelope(){
+    envelope.classList.add("open");
+  }
+
+  /* YES */
+  function celebrate(e){
+    e.stopPropagation();
+    yay.style.display="flex";
+    setTimeout(()=>{
+      document.body.style.opacity="0"; /* Fade out */
+      setTimeout(()=>{
+        window.location.href="index.html";
+      },800);
+    },1500);
+  }
+
+  /* NO */
+  function askSure(e){
+    e.stopPropagation();
+    modal.style.display="flex";
+  }
+
+  /* Oops button FIXED */
+  function closeModal(){
+    modal.style.display="none";
+  }
+
+  /* Show cat */
+  function showCat(){
+    modal.style.display="none";
+    catOverlay.style.display="flex";
+    catVideo.muted=false;
+    catVideo.play();
+  }
+</script>
+
+</body>
+</html>
